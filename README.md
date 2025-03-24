@@ -1,11 +1,11 @@
 # TrustBuilder MFA custom enrolment process for Virtual Token
 
 ## Description
-	This php sample website provide a custom TrustBuider Virtual Authenticator (or "Browser Token") enrolment process
-	(alternative to standard user MFA enrolment scenario)
-	Followed by an enrolment of a second device (ie. mobile/authenticator)
-	With some options (logo, title, qrcode, qrcode links, ...)
-	And provide also the possibility for the user to test his browser token authentication
+This php sample website provide a custom TrustBuider Virtual Authenticator (or "Browser Token") enrolment process
+(alternative to standard user MFA enrolment scenario)
+Followed by an enrolment of a second device (ie. mobile/authenticator)
+With some options (logo, title, qrcode, qrcode links, ...)
+And provide also the possibility for the user to test his browser token authentication
 
 ## Version / ChangeLog
 	Copyright (c)2024 TrustBuilder (formerly inWebo Technologies)
