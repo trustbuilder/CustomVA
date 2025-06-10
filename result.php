@@ -1,68 +1,45 @@
 <?php
+/*
+CustomVA 2024-2025 - TrustBuilder (formerly inWebo Technologies)
+VERSION	 	: v1.4 - 2025.06.10
+LICENSE		: Please consult the provided LICENSE file
+README 		: Please consult the provided README  file
+CHANGELOG	: Please consult the provided README  file
+*/
+
 //Main loading
-include './_loader.php'; 
+include_once './_loader.php';
+include_once './options.php'; 
 
-//Handle data
-$postData = $helpers->getPostData($_GET);
-$login = $postData['login'];
-$pwd = $postData['pwd'];
-
-$params = array (
-	"userId" => $_GET['login'],
-	"token" => $_GET['pwd']
-);
+if (!empty($_GET['login'])) { $login=filter_var($_GET['login'], FILTER_SANITIZE_STRING); } else { $login=""; }
+if (!empty($_GET['pwd']))   { $pwd=filter_var($_GET['pwd'],     FILTER_SANITIZE_STRING); } else { $pwd=""; }
 
 try{
 	// Call through inwebo php APIs
 	$auth = $apiFunctions->Authenticate($login, $pwd);
 	}catch(Exception $e){
-		echo $e->getMessage();
+		$auth = $e->getMessage();
 	}
 ?>
 
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-html, body {
-	display: flex;
-	justify-content: center;
-	height: 100%;
-}
-body, div, h1 { 
-	padding: 0;
-	margin: 20px 20px 20px 20px ;
-	outline: none;
-	font-family: Poppins, Arial, sans-serif;
-	font-size: 16px;
-	color: #666;
-}
-h1 {
-	padding: 00px 20px;
-	font-size: 32px;
-	font-weight: 300;
-	text-align: center;
-}
-.result {
-	justify-content: center;
-	padding: 10px 20px;
-	margin: auto ;
-	border-radius: 5px; 
-	border: solid 1px #ccc;
-	box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
-	background: #ebebeb;
-}
-</style>
-
+<head><link rel="stylesheet" href="./customva.css" />
+<link rel="icon" type="image/x-icon" href="./favicon.ico">
 </head>
 
 <?php
 // Check response
 if ($auth === 'OK' ) {
-	echo '<body><div class="result" ><center><img src="./acme.png"/></center><hr><h1 style="color:green;">User Authenticated !</h1></div></body>';
+	echo '<body><div class="result" ><center>'.$logo_signin.'</center><hr><h1 style="color:green;">Votre test d\'authentification est validé !</h1>';
+	if ( $opt_redirect ) { echo '<hr><center>Vous allez être redirigé vers : <a href="'.$opt_redirect.'">'.$opt_redirect.'</a></center></div>'; echo "<meta http-equiv=\"refresh\" content=\"4;url=$opt_redirect\"></body>";}
+		else { echo '</div></body>'; }
 } else {
-	echo '<body><div class="result" ><center><img src="/acme.png"/></center><hr><h1 style="color:red;">User NOT Authenticated !</h1></div></body>';
+	echo '<body><div class="result" ><center>'.$logo_signin.'</center><hr><h1 style="color:red;">User NOT Authenticated !</h1>
+	<hr><h2>Votre authentification n\'est pas validée.<br>Contactez votre support.<br><br><i><p style="font-size:75%">Erreur : '.$auth.'</p></i></h2>';
+	echo '</div></body>';
 } 
 ?>
-
 </html>
+
+

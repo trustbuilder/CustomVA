@@ -1,12 +1,22 @@
 <?php
-include_once './resources/settings.php';
+/*
+CustomVA 2024-2025 - TrustBuilder (formerly inWebo Technologies)
+VERSION	 	: v1.4 - 2025.06.10
+LICENSE		: Please consult the provided LICENSE file
+README 		: Please consult the provided README  file
+CHANGELOG	: Please consult the provided README  file
+*/
+
+include_once './_loader.php';
+include_once './options.php';
 ?>
 
 <!DOCTYPE html>
 <html>
   <head>
     <title>Connect</title>
-	<link rel="stylesheet" href="./index.css">
+	<link rel="stylesheet" href="./customva.css">
+	<link rel="icon" type="image/x-icon" href="./favicon.ico">
 
 
 	<script type="text/JavaScript" src="https://ult-inwebo.com/va/client.js"></script>
@@ -47,7 +57,7 @@ include_once './resources/settings.php';
 
 		
 		<div id="main-block" class="main-block">
-			<center><img src="./acme.png"/></center>
+			<?php echo '<center>'.$logo_signin.'</center>'; ?>
 			<h1><b></b>Vous connecter</b></h1>
 			<hr>
 			<div id="myStart" data-action="authentication" data-verbose="1" data-container="main-block" data-quiet-start="1" data-lang="auto" data-width="M" data-alias="<?php echo $alias?>"></div>
